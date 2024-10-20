@@ -1,6 +1,6 @@
 ---
 - name: rhel 8 hardening
-  hosts: redhat8 
+  hosts: all 
   gather_facts: true
   vars:
     changed_all_user: true 
