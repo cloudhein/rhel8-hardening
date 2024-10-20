@@ -1,0 +1,16 @@
+---
+- name: "4.4.3.2.2 | PATCH | Ensure password length is configured | pwquality.confi | Updated 2024"
+  ansible.builtin.lineinfile:
+      path: /etc/security/pwquality.conf
+      state: present
+      regexp: '^(#|)\s*minlen\s*=\s*\d'
+      line: "minlen = {{ rhel8cis_pam_pwquality['minlen'] }}"
+
+- name: "4.4.3.2.2 | PATCH | Ensure password length is configured | pam_files | Updated 2024"
+  ansible.builtin.replace:
+      path: "/etc/pam.d/{{ item }}-auth"
+      regexp: ^(\s*password\s+(requisite|required|sufficient)\s+pam_pwquality\.so)(.*)\s+minlen\s*=\s*\S+(.*$)
+      replace: \1\2\3
+  loop:
+      - password
+      - system
