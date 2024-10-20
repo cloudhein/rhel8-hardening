@@ -2,9 +2,9 @@
 - name: rhel 8 hardening
   hosts: all 
   gather_facts: true
-  vars:
-    changed_all_user: true 
-    lock_user_list: '' 
+  #vars:
+    #changed_all_user: true 
+    #lock_user_list: '' 
 
   roles:
     - role: ansible-rhel8-prasac
